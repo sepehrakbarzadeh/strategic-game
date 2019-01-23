@@ -2,7 +2,17 @@ from coordinates import ground
 
 
 territory = ground.Territory()
-ploc = ground.Location(3, 2)
+ploc = ground.Location(0, 2)
 
-territory.draw(ploc.current)
+
+
+while True:
+    answer=input("Enter Your direction >>> ").lower()
+    if  answer in territory.check_possible_moves(ploc.current):
+        ploc.move(answer)
+    else:
+        print
+        continue
+    territory.draw(ploc.current)
+
 
