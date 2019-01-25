@@ -4,14 +4,15 @@ import random
 class Location:
     DIRECTIONS = ('right', 'left', 'up', 'down')
 
-    def __init__(self, x_axis = 0, y_axis = 0):
+    def __init__(self, axis=(1,1)):
         """Defines x and y variables
         
         Arguments:
             x {[int]} -- [x coordinate]
             y {[int]} -- [y coordinate]
         """
-        if x_axis < 0 or y_axis < 0:
+        x_axis,y_axis=axis
+        if x_axis <= 0 or y_axis <= 0:
             raise ValueError("Value must be positive")
 
         self.X = x_axis
@@ -38,36 +39,42 @@ class Location:
             raise ValueError("You must enter one of these values {}".format(direction))
 
         if direction == right:
-            self.X + 1
+            self.X +=1
         if direction == left:
             self.X -= 1
         if direction == up:
-            self.Y += 1
-        if direction == down:
             self.Y -= 1
+        if direction == down:
+            self.Y += 1
         
         return self.current
 
     def distance(self, pos):
-        dx = pos.X - self.X
-        dy = pos.Y - self.Y
+        dx = pos[0] - self.X
+        dy = pos[1] - self.Y
         return hypot(dx, dy)
     
     @property
     def current(self):
+        if self.X <= 0 :
+            self.X = 1
+        if self.Y <=0:
+            self.Y =1    
         return self.X, self.Y
 
     @property
     def getX(self):
         return self.X
     
+    @getX.setter
     def setX(self, value):
         self.X = value
     
     @property
     def getY(self):
         return self.Y
-    
+
+    @getY.setter
     def setY(self, value):
         self.Y = value
 
@@ -93,7 +100,7 @@ class Location:
 class Territory:
     def __init__(self, dimension = (10, 10), *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.cells = [(x, y) for y in range(dimension[1]) for x in range(dimension[0])]
+        self.cells = [(x, y) for y in range(1,dimension[1]+1) for x in range(1,dimension[0]+1)]
         self.boundries = (dimension[0], dimension[1])
     
     def draw(self, ploc):
@@ -105,10 +112,9 @@ class Territory:
         # import pdb; pdb.set_trace()
         print(" _" * self.boundries[0])
         tile = "|{}"
-
         for cell in self.cells:
             x, y = cell
-            if x < self.boundries[0] - 1:
+            if x < self.boundries[0]:
                 line_end = ""
                 if cell == ploc:
                     output = tile.format("X")
@@ -128,34 +134,33 @@ class Territory:
 
     def check_possible_moves(self, ploc):
         possible_moves = ['left', 'right', 'up', 'down']
-        
         x, y = ploc
-        
-        if x == 0:
+        if x == 1:
             possible_moves.remove("left")
         if x == self.boundries[0]:
             possible_moves.remove('right')
-        if y == 0:
+        if y == 1:
             possible_moves.remove('up')
         if y == self.boundries[1]:
             possible_moves.remove('down')
         
         return possible_moves
 
-    def move_player(self, ploc, movement):
-        x, y = ploc
-        movement = movement.lower()
+## whay Used That ?
+    # def move_player(self, ploc, movement):
+    #     x, y = ploc
+    #     movement = movement.lower()
         
-        if movement == "left":
-            x -= 1
-        if movement == "right":
-            x += 1
-        if movement == "up":
-            y -= 1
-        if movement == "down":
-            y += 1
-    
-        return x, y
+    #     if movement == "left":
+    #         x -= 1
+    #     if movement == "right":
+    #         x += 1
+    #     if movement == "up":
+    #         y -= 1
+    #     if movement == "down":
+    #         y += 1
+
+    #     return x, y
     
         
 
