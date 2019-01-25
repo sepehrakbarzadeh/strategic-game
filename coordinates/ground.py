@@ -11,8 +11,6 @@ class Location:
             x {[int]} -- [x coordinate]
             y {[int]} -- [y coordinate]
         """
-        print('*************** ' )
-        print(axis)
         x_axis,y_axis=axis
         if x_axis <= 0 or y_axis <= 0:
             raise ValueError("Value must be positive")
