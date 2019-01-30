@@ -1,8 +1,15 @@
 from coordinates import ground
+from characters.hero import Human, Dragon
+
+# territory = ground.Territory()
+# ploc = ground.Location(3, 2)
+
+# territory.draw(ploc.current)
 
 
-territory = ground.Territory()
-ploc = ground.Location(3, 2)
+player = Human(name = 'sepehr')
+dragon = Dragon(name = 'demon')
 
-territory.draw(ploc.current)
+player.walk()
+dragon.shout()
 
