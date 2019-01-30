@@ -1,3 +1,4 @@
+
 class Character:
     
     def __init__(self, name, *args, **kwargs):
@@ -42,4 +43,6 @@ class Character:
     def __str__(self):
         return "{}: {}".format(self.__class__.__name__, self.name)
 
+    def __repr__(self):
+        return "{}: {}".format(self.__class__.__name__, self.name)
 

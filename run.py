@@ -1,15 +1,19 @@
-from coordinates import ground
-from characters.hero import Human, Dragon
+# from coordinates import ground
+# from characters.hero import Human, Dragon
+# from game.kernel.settings import Setting
 
-# territory = ground.Territory()
-# ploc = ground.Location(3, 2)
+
 
 # territory.draw(ploc.current)
 
+from game.kernel.manager import run
+from game.characters.hero import HeroFactory
 
-player = Human(name = 'sepehr')
-dragon = Dragon(name = 'demon')
+# run('hard')
 
-player.walk()
-dragon.shout()
+
+run('easy')
+
+
+
 
