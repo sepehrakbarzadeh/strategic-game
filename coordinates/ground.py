@@ -175,5 +175,4 @@ class Human(Location,Intellig,Characters):
 
 
 
-obj = Characters.factory('human')
-print(type(obj))
+
