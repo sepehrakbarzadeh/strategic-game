@@ -1,6 +1,4 @@
-from math import hypot
-import random
-
+#!/usr/bin/python3.6
 class Location:
     DIRECTIONS = ('right', 'left', 'up', 'down')
 
@@ -13,7 +11,6 @@ class Location:
         """
         if x_axis < 0 or y_axis < 0:
             raise ValueError("Value must be positive")
-
         self.X = x_axis
         self.Y = y_axis
         self.vector = (x_axis, y_axis)
@@ -38,7 +35,7 @@ class Location:
             raise ValueError("You must enter one of these values {}".format(direction))
 
         if direction == right:
-            self.X += 1
+            self.X +=1
         if direction == left:
             self.X -= 1
         if direction == up:
@@ -86,10 +83,6 @@ class Location:
         return "Point({}, {})".format(self.X, self.Y)
 
 
-# Suggestions
-## Region
-## Territory
-## Grid
 class Territory:
     def __init__(self, dimension = (10, 10), *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -142,27 +135,45 @@ class Territory:
         
         return possible_moves
 
-    def move_player(self, ploc, movement):
-        x, y = ploc
-        movement = movement.lower()
-        
-        if movement == "left":
-            x -= 1
-        if movement == "right":
-            x += 1
-        if movement == "up":
-            y -= 1
-        if movement == "down":
-            y += 1
-    
-        return x, y
-    
-        
+
+class Agility:
+    def __init__(self):
+        self.FastMove=True #cat move 2 title 
+        self.Detect=True #ablity to see map with dragon
+
+
+class Intellig:
+    def __init__(self):
+        self.Hidden =True #can hide on map
+        self.Jump = True # can jump
+
+
+class Characters():
+    '''
+    Factory method pattern
+    '''
+    def factory(type):
+        if type == 'dragon':
+            return Dragon()
+        elif type == 'human':
+            return Human()
+        else:
+             pass    
+    factory = staticmethod(factory)
+
+
+class Dragon(Location,Agility,Characters):
+    def __init__(self):
+        Location.__init__(self,5,10)
+        Agility.__init__(self)
+
+
+class Human(Location,Intellig,Characters):
+    def __init__(self):
+        Location.__init__(self,5,10)
+        Intellig.__init__(self)
 
 
 
-
-
-
-
-    
+obj = Characters.factory('human')
+print(type(obj))
