@@ -38,7 +38,7 @@ class Location:
             raise ValueError("You must enter one of these values {}".format(direction))
 
         if direction == right:
-            self.X + 1
+            self.X += 1
         if direction == left:
             self.X -= 1
         if direction == up:
